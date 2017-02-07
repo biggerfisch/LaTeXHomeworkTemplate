@@ -1,16 +1,32 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Programming/Coding Assignment
+% LaTeX Template
+%
 % This template has been downloaded from:
 % http://www.latextemplates.com
-
-% Heavily modified by Avery Fischer
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+% This template uses a Perl script as an example snippet of code, most other
+% languages are also usable. Configure them in the "CODE INCLUSION 
+% CONFIGURATION" section.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %----------------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
-\documentclass{article}
+
+\documentclass[9pt]{extarticle}
+\usepackage{extsizes}
 \usepackage{minted}
-
-\usemintedstyle{bw} % Found by running pygmentize -L styles 
-
+\usepackage{fancyvrb}
 \usepackage{fancyhdr} % Required for custom headers
 \usepackage{lastpage} % Required to determine the last page for the footer
 \usepackage{extramarks} % Required for headers and footers
@@ -18,30 +34,39 @@
 \usepackage{graphicx} % Required to insert images
 \usepackage{listings} % Required for insertion of code
 \usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage[margin=0.75in]{geometry}
 
 % Margins
-\topmargin=-0.45in
-\evensidemargin=0in
-\oddsidemargin=0in
-\textwidth=6.5in
-\textheight=9.0in
-\headsep=0.25in
+%\topmargin=-0.45in
+%\evensidemargin=0in
+%\oddsidemargin=0in
+%\textwidth=7in
+%\textheight=9.0in
+%\headsep=0.25in
 
 \linespread{1.1} % Line spacing
 
 % Set up the header and footer
 \pagestyle{fancy}
 \lhead{\hmwkAuthorName} % Top left header
-\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
-\rhead{\firstxmark} % Top right header
+\chead{\hmwkClass:\ \hmwkTitle} % Top center head
+\rhead{\hmwkDueDate} % Top right header
 \lfoot{\lastxmark} % Bottom left footer
 \cfoot{} % Bottom center footer
 \rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+%\rfoot{Page\ \thepage} % Bottom right footer
 \renewcommand\headrulewidth{0.4pt} % Size of the header rule
 \renewcommand\footrulewidth{0.4pt} % Size of the footer rule
 
 \setlength\parindent{0pt} % Removes all indentation from paragraphs
 
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+% Replaced by minted
 
 %----------------------------------------------------------------------------------------
 %	DOCUMENT STRUCTURE COMMANDS
@@ -50,14 +75,18 @@
 
 % Header and footer for when a page split occurs within a problem environment
 \newcommand{\enterProblemHeader}[1]{
-\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
-\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+%\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+%\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{}{#1 continued on next page\ldots}\nobreak
 }
 
 % Header and footer for when a page split occurs between problem environments
 \newcommand{\exitProblemHeader}[1]{
-\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
-\nobreak\extramarks{#1}{}\nobreak
+%\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+%\nobreak\extramarks{#1}{}\nobreak
+\nobreak\extramarks{}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{}{}\nobreak
 }
 
 \setcounter{secnumdepth}{0} % Removes default section numbers
@@ -73,9 +102,14 @@
 \exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
 }
 
-\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
-\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
-}
+% Add a new env for answers
+\DefineVerbatimEnvironment%
+{problemAnswerVerbatim}{Verbatim}
+  {frame=single}
+
+\CustomVerbatimCommand%
+{\problemAnswerVerbatimInput}{VerbatimInput}
+  {frame=single}
 
 \newcommand{\homeworkSectionName}{}
 \newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
@@ -90,12 +124,12 @@
 %	NAME AND CLASS SECTION
 %----------------------------------------------------------------------------------------
 
-\newcommand{\hmwkTitle}{Assignment\ \#1} % Assignment title
-\newcommand{\hmwkDueDate}{Monday,\ January\ 1,\ 2012} % Due date
-\newcommand{\hmwkClass}{COMPSCI\ 101} % Course/class
-\newcommand{\hmwkClassTime}{10:30am} % Class/lecture time
-\newcommand{\hmwkClassInstructor}{Jones} % Teacher/lecturer
-\newcommand{\hmwkAuthorName}{John Smith} % Your name
+\newcommand{\hmwkTitle}{Homework\ 1} % Assignment title
+\newcommand{\hmwkDueDate}{Tuesday,\ January\ 31,\ 2017} % Due date
+\newcommand{\hmwkClass}{Physics\ 411} % Course/class
+\newcommand{\hmwkClassTime}{10:00am} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{Newman} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Avery Fischer} % Your name
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
@@ -116,7 +150,7 @@
 
 \begin{document}
 
-\maketitle
+%\maketitle
 
 %----------------------------------------------------------------------------------------
 %	TABLE OF CONTENTS
@@ -124,6 +158,30 @@
 
 %\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
 
-\newpage
-\tableofcontents
-\newpage
+%\newpage
+%\tableofcontents
+%\newpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM EXAMPLE
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\homeworkSectionName{b)}
+\inputminted{python}{problem_1_b.py}
+\problemAnswerVerbatimInput{problem_1_b.out}
+\begin{center}
+\includegraphics[width=0.75\columnwidth]{problem_1_b.png} 
+\end{center}
+What I have to say
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
