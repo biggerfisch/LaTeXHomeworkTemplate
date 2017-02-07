@@ -23,6 +23,8 @@
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
+\errorcontextlines 10000
+
 \documentclass[9pt]{extarticle}
 \usepackage{extsizes}
 \usepackage{minted}
@@ -34,7 +36,8 @@
 \usepackage{graphicx} % Required to insert images
 \usepackage{listings} % Required for insertion of code
 \usepackage{courier} % Required for the courier font
-\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{underscore}
 
 \usepackage[margin=0.75in]{geometry}
 
@@ -92,14 +95,39 @@
 \setcounter{secnumdepth}{0} % Removes default section numbers
 \newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
 
-\newcommand{\homeworkProblemName}{}
+\newcommand{\homeworkProblemName}{}%
+\newcommand{\homeworkProblemFilenameBase}{}%
+\newcommand{\homeworkPython}{\inputminted{python}{\homeworkProblemFilenameBase.py}}%
+\newcommand{\homeworkOutput}{\problemAnswerVerbatimInput{\homeworkProblemFilenameBase.out}}%
+\newcommand{\homeworkGraph}{\begin{center}\includegraphics[width=0.75\columnwidth]{\homeworkProblemFilenameBase.png}\end{center}}%
+
 \newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+
+
+\renewcommand{\homeworkProblemFilenameBase}{problem_\thehomeworkProblemCounter}
+
 \stepcounter{homeworkProblemCounter} % Increase counter for number of problems
 \renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
 \section{\homeworkProblemName} % Make a section in the document with the custom problem count
 \enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
 }{
 \exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+
+\newcommand{\homeworkSectionName}{}
+
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+
+
+\renewcommand{\homeworkProblemFilenameBase}{problem_\thehomeworkProblemCounter_\homeworkSectionName}
+%\renewcommand{\homeworkPython}{\inputminted{python}{\homeworkProblemFilenameBase.py}}
+
+\subsection{\homeworkSectionName)} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
 }
 
 % Add a new env for answers
@@ -110,15 +138,6 @@
 \CustomVerbatimCommand%
 {\problemAnswerVerbatimInput}{VerbatimInput}
   {frame=single}
-
-\newcommand{\homeworkSectionName}{}
-\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
-\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
-\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
-\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
-}{
-\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
-}
 
 %----------------------------------------------------------------------------------------
 %	NAME AND CLASS SECTION
@@ -162,24 +181,20 @@
 %\tableofcontents
 %\newpage
 
+% To have just one problem per page, simply put a \clearpage after each problem
+
 %----------------------------------------------------------------------------------------
 %	PROBLEM 1
 %----------------------------------------------------------------------------------------
 
-% To have just one problem per page, simply put a \clearpage after each problem
-
-%----------------------------------------------------------------------------------------
-%	PROBLEM EXAMPLE
-%----------------------------------------------------------------------------------------
-
 \begin{homeworkProblem}
-\homeworkSectionName{b)}
-\inputminted{python}{problem_1_b.py}
-\problemAnswerVerbatimInput{problem_1_b.out}
-\begin{center}
-\includegraphics[width=0.75\columnwidth]{problem_1_b.png} 
-\end{center}
-What I have to say
+\begin{homeworkSection}{b}
+
+\homeworkPython
+\homeworkOutput
+\homeworkGraph
+
+\end{homeworkSection}
 \end{homeworkProblem}
 
 %----------------------------------------------------------------------------------------
