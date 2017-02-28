@@ -2,21 +2,17 @@
 % Programming/Coding Assignment
 % LaTeX Template
 %
-% This template has been downloaded from:
-% http://www.latextemplates.com
-%
+% Orginally downloaded from http://www.latextemplates.com/template/programming-coding-assignment
 % Original author:
 % Ted Pavlic (http://www.tedpavlic.com)
 %
-% Note:
-% The \lipsum[#] commands throughout this template generate dummy text
-% to fill the template out. These commands should all be removed when 
-% writing assignment content.
+% Extensively modified by Avery Fischer (http://averyjfischer.com)
+%     Also added Makefile & runner script to better automate the process
 %
-% This template uses a Perl script as an example snippet of code, most other
-% languages are also usable. Configure them in the "CODE INCLUSION 
-% CONFIGURATION" section.
-%
+% Now found at https://github.com/biggerfisch/LaTeXHomeworkTemplate
+% 
+% As specified on http://www.latextemplates.com, this work is under a Creative Commons License: CC BY-NC-SA 3.0
+%  https://creativecommons.org/licenses/by-nc-sa/3.0/
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %----------------------------------------------------------------------------------------
@@ -41,14 +37,6 @@
 
 \usepackage[margin=0.75in]{geometry}
 
-% Margins
-%\topmargin=-0.45in
-%\evensidemargin=0in
-%\oddsidemargin=0in
-%\textwidth=7in
-%\textheight=9.0in
-%\headsep=0.25in
-
 \linespread{1.1} % Line spacing
 
 % Set up the header and footer
@@ -66,28 +54,18 @@
 \setlength\parindent{0pt} % Removes all indentation from paragraphs
 
 %----------------------------------------------------------------------------------------
-%	CODE INCLUSION CONFIGURATION
-%----------------------------------------------------------------------------------------
-
-% Replaced by minted
-
-%----------------------------------------------------------------------------------------
 %	DOCUMENT STRUCTURE COMMANDS
 %	Skip this unless you know what you're doing
 %----------------------------------------------------------------------------------------
 
 % Header and footer for when a page split occurs within a problem environment
 \newcommand{\enterProblemHeader}[1]{
-%\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
-%\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
 \nobreak\extramarks{}{#1 continued on next page\ldots}\nobreak
 \nobreak\extramarks{}{#1 continued on next page\ldots}\nobreak
 }
 
 % Header and footer for when a page split occurs between problem environments
 \newcommand{\exitProblemHeader}[1]{
-%\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
-%\nobreak\extramarks{#1}{}\nobreak
 \nobreak\extramarks{}{#1 continued on next page\ldots}\nobreak
 \nobreak\extramarks{}{}\nobreak
 }
@@ -169,7 +147,7 @@
 
 \begin{document}
 
-%\maketitle
+%\maketitle % Uncomment to use a title page (useful for takehome exams)
 
 %----------------------------------------------------------------------------------------
 %	TABLE OF CONTENTS
@@ -177,12 +155,15 @@
 
 %\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
 
+% Uncomment these for a table of contents
 %\newpage
 %\tableofcontents
 %\newpage
 
 % To have just one problem per page, simply put a \clearpage after each problem
 
+% Automatically increases the problem number for each new homeworkProblem section
+% Adding a homeworkSection within that is good for multi-part problems
 %----------------------------------------------------------------------------------------
 %	PROBLEM 1
 %----------------------------------------------------------------------------------------

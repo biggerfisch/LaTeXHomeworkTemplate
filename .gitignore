@@ -90,3 +90,12 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+
+#######################################
+
+*.aux
+*.pdf
+*.out
+*.png
+_minted-*/
